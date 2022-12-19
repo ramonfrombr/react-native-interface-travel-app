@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { TailwindProvider } from "tailwind-rn";
+import HomeScreen from "./screens/HomeScreen";
+import TourDetailsScreen from "./screens/TourDetailsScreen";
+import utilities from "./tailwind.json";
+import { TOURS } from "./config/TOURS";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RootNavigator from "./navigator/RootNavigator";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // @ts-ignore - Tailwind Provider is missing type definition
+
+    <TailwindProvider utilities={utilities}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </TailwindProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
